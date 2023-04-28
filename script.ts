@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 type GraphQLQuery = string;
 type Variables = { [key: string]: any };
 
-const endpoint = "https://api.thegraph.com/subgraphs/name/somemoecoding/surgeswap-v2";
-const tokenID = process.argv[2] || "0x9f19c8e321bD14345b797d43E01f0eED030F5Bff";
+const endpoint = process.env.ENDPOINT ?? "";
+const tokenID = process.argv[2] ?? process.env.DEFAULT_TOKEN_ID;
 
 const query = `
     query SurgeSwapV2TokenDayDatas($id: ID!) {
@@ -17,7 +20,7 @@ const query = `
     }
 `;
 
-const fetchData = async (endpoint: string, query: GraphQLQuery, variables: Variables) => {
+const fetchData = async (query: GraphQLQuery, variables: Variables) => {
     const response = await fetch(endpoint, {
         method: "POST",
         headers: {
@@ -36,7 +39,7 @@ const fetchData = async (endpoint: string, query: GraphQLQuery, variables: Varia
 
 const main = async () => {
     try {
-        const result = await fetchData(endpoint, query, { id: tokenID });
+        const result = await fetchData(query, { id: tokenID });
         console.log("Get data", result.data.token.tokenDayData);
     } catch (error) {
         console.error("Error fetching data:", error);
