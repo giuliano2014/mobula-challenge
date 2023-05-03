@@ -1,7 +1,8 @@
 {
     "scripts": {
-        "start:surgeswap-v2-api": "ts-node surgeswap-v2-api.ts",
-        "start:binance-api": "ts-node binance-api.ts"
+        "start:binance-api": "ts-node binance-api.ts",
+        "start:bscscan-api": "ts-node bscscan-api.ts",
+        "start:surgeswap-v2-api": "ts-node surgeswap-v2-api.ts"
     },
     "devDependencies": {
         "@types/node": "^18.16.1",
@@ -9,6 +10,7 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
+        "axios": "^1.4.0",
         "dotenv": "^16.0.3"
     }
 }
