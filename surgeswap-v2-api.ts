@@ -4,7 +4,7 @@ dotenv.config();
 type GraphQLQuery = string;
 type Variables = { [key: string]: any };
 
-const endpoint = process.env.ENDPOINT ?? "";
+const endpoint = process.env.SURGESWAP_V2_ENDPOINT ?? "";
 const tokenID = process.argv[2] ?? process.env.DEFAULT_TOKEN_ID;
 
 const query = `

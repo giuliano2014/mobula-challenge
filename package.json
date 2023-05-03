@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "ts-node script.ts",
+        "start:surgeswap-v2-api": "ts-node surgeswap-v2-api.ts",
         "start:binance-api": "ts-node binance-api.ts"
     },
     "devDependencies": {
