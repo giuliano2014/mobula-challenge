@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "start": "ts-node script.ts"
+        "start": "ts-node script.ts",
+        "start:binance-api": "ts-node binance-api.ts"
     },
     "devDependencies": {
         "@types/node": "^18.16.1",
