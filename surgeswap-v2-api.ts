@@ -8,13 +8,22 @@ const endpoint = process.env.SURGESWAP_V2_ENDPOINT ?? "";
 const tokenID = process.argv[2] ?? process.env.DEFAULT_TOKEN_ADDRESS;
 
 const query = `
-    query SurgeSwapV2TokenDayDatas($id: ID!) {
-        token(id: $id) {
-            tokenDayData(where: {_change_block: {number_gte: 0}}) {
-                date
+    query SurgeSwapV2TokenDayData($id: ID!) {
+        token(id: $id, block: {number_gte: 0}) {
+            tokenDayData {
+                __typename
+                dailyTxns
                 dailyVolumeUSD
+                date
                 priceUSD
                 totalLiquidityUSD
+                token {
+                    __typename
+                    id
+                    name
+                    symbol
+                    totalSupply
+                }
             }
         }
     }
@@ -40,7 +49,10 @@ const fetchData = async (query: GraphQLQuery, variables: Variables) => {
 const main = async () => {
     try {
         const result = await fetchData(query, { id: tokenID });
+        // console.log("Get data", result.data);
+        // console.log("Get data", result.data.token);
         console.log("Get data", result.data.token.tokenDayData);
+        // console.log("Get data", result.data.token.tokenDayData.length);
     } catch (error) {
         console.error("Error fetching data:", error);
     }
